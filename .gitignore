@@ -1,0 +1,22 @@
+# OS
+.DS_Store
+Thumbs.db
+
+# WSL Zone.Identifier files
+*:Zone.Identifier
+
+# Editor
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+
+# Node.js (handson samples)
+node_modules/
+dist/
+.env
+.env.*
+
+# Logs
+*.log
