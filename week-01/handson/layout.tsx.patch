@@ -1,0 +1,41 @@
+--- a/app/layout.tsx
++++ b/app/layout.tsx
+@@ -1,11 +1,23 @@
++// [追加] GoogleAnalytics コンポーネントをインポート
++import { GoogleAnalytics } from '@/components/GoogleAnalytics'
++
+ import type { Metadata } from 'next'
+ import { Inter } from 'next/font/google'
+ import './globals.css'
+
+ const inter = Inter({ subsets: ['latin'] })
+
+ export const metadata: Metadata = {
+   title: 'EC Site',
+   description: 'EC Project',
+ }
+
++// [追加] 環境変数から GA4 測定ID を取得
++// .env.local に NEXT_PUBLIC_GA_ID=G-XXXXXXXXXX を設定すること
++const gaId = process.env.NEXT_PUBLIC_GA_ID ?? ''
++
+ export default function RootLayout({
+   children,
+ }: {
+   children: React.ReactNode
+ }) {
+   return (
+     <html lang="ja">
+       <body className={inter.className}>
++        {/*
++          [追加] GoogleAnalytics コンポーネントを配置
++          - layout.tsx のルートに置くことで全ページで計測が有効になる
++          - gaId が空文字の場合は自動的に何もレンダリングされない
++          - <body> タグの直下（children より前）に配置すること
++        */}
++        <GoogleAnalytics gaId={gaId} />
+         {children}
+       </body>
+     </html>
+   )
+ }
